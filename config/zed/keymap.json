@@ -1,22 +1,5 @@
 [
   {
-    "context": "Workspace",
-    "bindings": {
-      "cmd-k j": [
-        "task::Spawn",
-        { "task_name": "JSON Converter: Smart convert current file" }
-      ],
-      "cmd-k x": [
-        "task::Spawn",
-        { "task_name": "JSON to Excel: Convert current file" }
-      ],
-      "cmd-k d": [
-        "task::Spawn",
-        { "task_name": "CSV Format: Detect current file" }
-      ]
-    }
-  },
-  {
     "context": "Editor && (extension == json || extension == csv || extension == tsv)",
     "bindings": {
       "cmd-shift-p": "task::Spawn",
