@@ -85,20 +85,12 @@ json-to-csv-converter/
 在 JSON、CSV 或 TSV 文件中，可以使用类似 VS Code 的可搜索命令体验：
 
 1. 按 <kbd>⌘ ⇧ P</kbd> 打开转换任务搜索框。
-2. 输入 `json to csv`、`csv to json`、`json to excel` 或 `csv format`。
+2. 输入 `json to csv`、`csv to json`、`json to excel` 或 `csv format`。JSON ↔ CSV 使用同一个智能转换命令，按当前文件扩展名自动决定方向。
 3. 选择命令并回车执行。
 
 由于 Zed 扩展 API 目前不允许第三方扩展向主 Command Palette 注册自定义 Action，这个配置会让数据文件中的 <kbd>⌘ ⇧ P</kbd> 直接打开官方 Task Picker。此时可用 <kbd>⌘ ⌥ ⇧ P</kbd> 打开原来的 Zed Command Palette；其他类型文件的 <kbd>⌘ ⇧ P</kbd> 不受影响。
 
-macOS 默认快捷键：
-
-| 快捷键 | 功能 |
-|---|---|
-| <kbd>⌘ K</kbd>，再按 <kbd>J</kbd> | 智能转换当前文件：JSON → CSV，CSV/TSV → JSON |
-| <kbd>⌘ K</kbd>，再按 <kbd>X</kbd> | 当前 JSON → Excel |
-| <kbd>⌘ K</kbd>，再按 <kbd>D</kbd> | 检测当前 CSV 的编码、分隔符和表头 |
-
-快捷键执行前会保存当前文件。输出默认生成在当前文件旁边，且不会覆盖已有文件；如果目标文件已经存在，任务终端会显示错误。
+任务执行前会保存当前文件。转换结果直接生成在当前文件所在目录，只替换扩展名，例如 `people.json` 生成 `people.csv`，`people.csv` 生成 `people.json`。默认不会覆盖已有文件；如果目标文件已经存在，任务终端会显示错误。
 
 Windows/Linux 可把示例 `keymap.json` 中的 `cmd-` 改成 `ctrl-`。也可以通过 `zed: open keymap` 自行更换按键。
 
