@@ -25,6 +25,8 @@ use rmcp::{
 use serde::Deserialize;
 use tokio_util::sync::CancellationToken;
 
+mod cli;
+
 const BASE_DIRECTORY_ENV: &str = "JSON_TO_CSV_CONVERTER_BASE_DIR";
 
 #[derive(Debug, Clone)]
@@ -411,30 +413,11 @@ fn error_text(error: impl std::fmt::Display) -> String {
     error.to_string()
 }
 
-fn print_help() {
-    println!(
-        "json-to-csv-converter-mcp {}\n\nStarts an MCP server for JSON to CSV/Excel and CSV to JSON conversion, with automatic CSV detection and streaming support.\n\nOptions:\n  --help       Show this help\n  --version    Show the version",
-        env!("CARGO_PKG_VERSION")
-    );
-}
-
 #[tokio::main]
 async fn main() -> Result<(), Box<dyn std::error::Error>> {
     let arguments = env::args().skip(1).collect::<Vec<_>>();
-    match arguments.as_slice() {
-        [argument] if argument == "--version" || argument == "-V" => {
-            println!("json-to-csv-converter-mcp {}", env!("CARGO_PKG_VERSION"));
-            return Ok(());
-        }
-        [argument] if argument == "--help" || argument == "-h" => {
-            print_help();
-            return Ok(());
-        }
-        [] => {}
-        _ => {
-            print_help();
-            return Err(format!("unexpected arguments: {}", arguments.join(" ")).into());
-        }
+    if cli::handle(&arguments)? {
+        return Ok(());
     }
 
     let service = JsonToCsvConverter.serve(stdio()).await?;

@@ -1,0 +1,35 @@
+[
+  {
+    "label": "JSON Converter: Smart convert current file",
+    "command": "json-to-csv-converter-mcp",
+    "args": ["convert", "$ZED_FILE"],
+    "cwd": "$ZED_DIRNAME",
+    "save": "current",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "no_focus",
+    "hide": "on_success"
+  },
+  {
+    "label": "JSON Converter: Current JSON to Excel",
+    "command": "json-to-csv-converter-mcp",
+    "args": ["json-to-excel", "$ZED_FILE"],
+    "cwd": "$ZED_DIRNAME",
+    "save": "current",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "no_focus",
+    "hide": "on_success"
+  },
+  {
+    "label": "JSON Converter: Detect current CSV format",
+    "command": "json-to-csv-converter-mcp",
+    "args": ["detect-csv", "$ZED_FILE"],
+    "cwd": "$ZED_DIRNAME",
+    "save": "current",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "always",
+    "hide": "never"
+  }
+]
