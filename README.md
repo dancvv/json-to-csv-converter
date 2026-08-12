@@ -1,13 +1,13 @@
 # JSON to CSV Converter for Zed
 
-一个通过 Zed Agent Panel 使用的 JSON、CSV、Excel 转换插件。支持 CSV 格式自动识别、大文件流式读写、转换进度、最大行数限制和中途取消，提供四个 MCP 工具：
+一个支持 Zed 快捷键、Task 和 Agent Panel 的 JSON、CSV、Excel 转换插件。支持 CSV 格式自动识别、大文件流式读写、转换进度、最大行数限制和中途取消，提供四个 MCP 工具：
 
 - `json_to_csv`：JSON → CSV
 - `json_to_excel`：JSON → Excel `.xlsx`
 - `csv_to_json`：CSV → JSON
 - `detect_csv_format`：只检测 CSV 的编码、分隔符和表头，不生成文件
 
-> Zed 当前没有面向普通扩展开放“读取当前编辑器并另存文件”的通用 API，并且已经移除了扩展自定义 Slash Command，因此本项目按官方推荐实现为 MCP Server Extension。转换服务本身与 Zed 解耦，后续也可以直接发布到 MCP Registry。
+> Zed 普通扩展目前不能直接注册自定义编辑器动作。快捷键模式通过官方 Zed Task 的 `$ZED_FILE` 变量取得当前文件，直接调用本项目的命令行入口，不需要启动或使用 Agent。
 
 ## 功能特点
 
@@ -61,6 +61,8 @@ json-to-csv-converter/
 
 4. 在 Agent Panel 的 MCP 设置中启用 `JSON to CSV Converter`。
 
+如果只使用快捷键模式，第 4 步可以跳过。
+
 如果从桌面启动的 Zed 找不到 Cargo 安装目录，请给 `binary_path` 配置绝对路径。可选的 `base_directory` 用来解析工具参数中的相对路径：
 
 ```json
@@ -76,7 +78,23 @@ json-to-csv-converter/
 }
 ```
 
-## 在 Zed 中使用
+## 快捷键模式（不使用 Agent）
+
+先执行 `zed: open tasks`，将 [`config/zed/tasks.json`](config/zed/tasks.json) 中的三个任务合并到全局 `tasks.json`；再执行 `zed: open keymap file`，将 [`config/zed/keymap.json`](config/zed/keymap.json) 中的快捷键合并到 `keymap.json`。
+
+macOS 默认快捷键：
+
+| 快捷键 | 功能 |
+|---|---|
+| <kbd>⌘ K</kbd>，再按 <kbd>J</kbd> | 智能转换当前文件：JSON → CSV，CSV/TSV → JSON |
+| <kbd>⌘ K</kbd>，再按 <kbd>X</kbd> | 当前 JSON → Excel |
+| <kbd>⌘ K</kbd>，再按 <kbd>D</kbd> | 检测当前 CSV 的编码、分隔符和表头 |
+
+快捷键执行前会保存当前文件。输出默认生成在当前文件旁边，且不会覆盖已有文件；如果目标文件已经存在，任务终端会显示错误。
+
+Windows/Linux 可把示例 `keymap.json` 中的 `cmd-` 改成 `ctrl-`。也可以通过 `zed: open keymap` 自行更换按键。
+
+## Agent 模式
 
 可以直接在 Agent Panel 中这样说：
 
@@ -107,6 +125,22 @@ json-to-csv-converter/
 自动检测只读取文件开头最多 128 KiB、最多 100 条记录，因此不会因为检测大文件而把整个文件读入内存。表头识别属于启发式判断；遇到结构特殊的无表头文件时，建议明确传入 `has_headers: false`。
 
 设置 `max_rows` 后，结果中的 `truncated` 会说明源文件是否还有未写出的数据。`csv_to_json` 的结果还会返回 `csv_detection`，包含最终采用的编码、分隔符、表头判断及其来源（自动检测或显式参数）。
+
+## 命令行模式
+
+不使用 Zed 也可以直接转换：
+
+```sh
+# 按扩展名智能转换：JSON → CSV，CSV/TSV → JSON
+json-to-csv-converter-mcp convert /path/to/people.json
+
+json-to-csv-converter-mcp json-to-csv /path/to/people.json
+json-to-csv-converter-mcp json-to-excel /path/to/people.json
+json-to-csv-converter-mcp csv-to-json /path/to/people.csv
+json-to-csv-converter-mcp detect-csv /path/to/people.csv
+```
+
+使用 `json-to-csv-converter-mcp --help` 查看输出路径、覆盖、最大行数、编码和分隔符等选项。
 
 ## 数据转换规则
 

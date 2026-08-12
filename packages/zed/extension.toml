@@ -1,7 +1,7 @@
 id = "json-to-csv-converter"
 name = "JSON to CSV Converter"
-description = "Convert JSON to CSV or Excel and CSV to JSON, with automatic delimiter, encoding, and header detection, large-file streaming, progress, row limits, and cancellation."
-version = "0.3.0"
+description = "Convert JSON to CSV or Excel and CSV to JSON, with automatic format detection, streaming, progress, row limits, cancellation, and optional task shortcuts."
+version = "0.4.0"
 schema_version = 1
 authors = ["spicytree <uquantum@hotmail.com>"]
 repository = "https://github.com/dancvv/json-to-csv-converter"
