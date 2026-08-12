@@ -80,7 +80,15 @@ json-to-csv-converter/
 
 ## 快捷键模式（不使用 Agent）
 
-先执行 `zed: open tasks`，将 [`config/zed/tasks.json`](config/zed/tasks.json) 中的三个任务合并到全局 `tasks.json`；再执行 `zed: open keymap file`，将 [`config/zed/keymap.json`](config/zed/keymap.json) 中的快捷键合并到 `keymap.json`。
+先执行 `zed: open tasks`，将 [`config/zed/tasks.json`](config/zed/tasks.json) 中的任务合并到全局 `tasks.json`；再执行 `zed: open keymap file`，将 [`config/zed/keymap.json`](config/zed/keymap.json) 中的快捷键合并到 `keymap.json`。
+
+在 JSON、CSV 或 TSV 文件中，可以使用类似 VS Code 的可搜索命令体验：
+
+1. 按 <kbd>⌘ ⇧ P</kbd> 打开转换任务搜索框。
+2. 输入 `json to csv`、`csv to json`、`json to excel` 或 `csv format`。
+3. 选择命令并回车执行。
+
+由于 Zed 扩展 API 目前不允许第三方扩展向主 Command Palette 注册自定义 Action，这个配置会让数据文件中的 <kbd>⌘ ⇧ P</kbd> 直接打开官方 Task Picker。此时可用 <kbd>⌘ ⌥ ⇧ P</kbd> 打开原来的 Zed Command Palette；其他类型文件的 <kbd>⌘ ⇧ P</kbd> 不受影响。
 
 macOS 默认快捷键：
 
