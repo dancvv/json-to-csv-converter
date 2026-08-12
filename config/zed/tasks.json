@@ -11,7 +11,29 @@
     "hide": "on_success"
   },
   {
-    "label": "JSON Converter: Current JSON to Excel",
+    "label": "JSON to CSV: Convert current file",
+    "command": "json-to-csv-converter-mcp",
+    "args": ["json-to-csv", "$ZED_FILE"],
+    "cwd": "$ZED_DIRNAME",
+    "save": "current",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "no_focus",
+    "hide": "on_success"
+  },
+  {
+    "label": "CSV to JSON: Convert current file",
+    "command": "json-to-csv-converter-mcp",
+    "args": ["csv-to-json", "$ZED_FILE"],
+    "cwd": "$ZED_DIRNAME",
+    "save": "current",
+    "use_new_terminal": false,
+    "allow_concurrent_runs": false,
+    "reveal": "no_focus",
+    "hide": "on_success"
+  },
+  {
+    "label": "JSON to Excel: Convert current file",
     "command": "json-to-csv-converter-mcp",
     "args": ["json-to-excel", "$ZED_FILE"],
     "cwd": "$ZED_DIRNAME",
@@ -22,7 +44,7 @@
     "hide": "on_success"
   },
   {
-    "label": "JSON Converter: Detect current CSV format",
+    "label": "CSV Format: Detect current file",
     "command": "json-to-csv-converter-mcp",
     "args": ["detect-csv", "$ZED_FILE"],
     "cwd": "$ZED_DIRNAME",

@@ -8,12 +8,19 @@
       ],
       "cmd-k x": [
         "task::Spawn",
-        { "task_name": "JSON Converter: Current JSON to Excel" }
+        { "task_name": "JSON to Excel: Convert current file" }
       ],
       "cmd-k d": [
         "task::Spawn",
-        { "task_name": "JSON Converter: Detect current CSV format" }
+        { "task_name": "CSV Format: Detect current file" }
       ]
+    }
+  },
+  {
+    "context": "Editor && (extension == json || extension == csv || extension == tsv)",
+    "bindings": {
+      "cmd-shift-p": "task::Spawn",
+      "cmd-alt-shift-p": "command_palette::Toggle"
     }
   }
 ]
