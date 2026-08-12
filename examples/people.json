@@ -1,0 +1,21 @@
+[
+  {
+    "id": "001",
+    "name": "张三",
+    "active": true,
+    "address": {
+      "city": "上海",
+      "district": "浦东新区"
+    },
+    "tags": ["研发", "AI"]
+  },
+  {
+    "id": "002",
+    "name": "李四",
+    "active": false,
+    "address": {
+      "city": "北京"
+    },
+    "tags": ["产品"]
+  }
+]

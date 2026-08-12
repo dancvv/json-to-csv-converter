@@ -1,0 +1,17 @@
+[package]
+name = "json-to-csv-converter-mcp"
+version.workspace = true
+edition.workspace = true
+authors.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+description = "MCP server for converting JSON, CSV, and Excel files"
+
+[dependencies]
+json-to-csv-converter-core = { path = "../json-to-csv-converter-core" }
+rmcp.workspace = true
+serde.workspace = true
+serde_json.workspace = true
+tokio.workspace = true
+tokio-util.workspace = true

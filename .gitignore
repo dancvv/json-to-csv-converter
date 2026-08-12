@@ -1,0 +1,5 @@
+/target/
+/packages/zed/target/
+/packages/zed/extension.wasm
+/.zed/
+.DS_Store

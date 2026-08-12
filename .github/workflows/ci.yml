@@ -1,0 +1,28 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: dtolnay/rust-toolchain@stable
+        with:
+          toolchain: "1.88"
+          components: clippy, rustfmt
+          targets: wasm32-wasip2
+      - name: Check formatting
+        run: cargo fmt --all -- --check
+      - name: Run tests
+        run: cargo test --workspace --locked
+      - name: Run Clippy
+        run: cargo clippy --workspace --all-targets --locked -- -D warnings
+      - name: Check Zed extension
+        run: cargo check --manifest-path packages/zed/Cargo.toml --target wasm32-wasip2 --locked
